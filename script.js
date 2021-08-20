@@ -1,3 +1,5 @@
+"use strict";
+
 // Algo 1 afficher liste de produit dynamique
 //Date + Visualisation
 
@@ -11,33 +13,64 @@
 
 // E  ResetAndInitMenu() // resetMenu + addAllToMenu
 
+// Algo 2 Ajouter produits au catalogue
+
+// A crèer un champ input
+
+//B créer bouton avec bouton onclick
+
+// C sur event appeler fonction AddItem(name) (le nom vient du input)
+
+// D Ajouter element de le arrayDeProduit
+
+// E  call reserAndInitMenu
+
+// F BONUS function checkDoublons (return un boolean true )
+
+// function avec param name à tester.
+
+// Boucle sur chaque produit et tester chaque élément.
+
+// si élément trouvé (nom) return true / sinon false
+
 // *************************************************************
 // variable
 
 let productList = [];
 const ul = document.querySelector("ul");
 const li = document.querySelectorAll("li");
-
+const nav = document.querySelector("nav");
+const input = document.querySelector("input");
 
 // *************************************************************
 // function
 
-const initArrayProduct = (product) => {
-  productList.push(product);
+
+
+const initArrayProduct = () => {
+  productList.push("Huawei");
+  productList.push("Samsung");
+  productList.push("Apple");
+  productList.push("Xiaomi");
+  productList.push("Oppo");
+  productList.push("Sony");
+  productList.push("Honor");
+  productList.push("LG");
 };
 
-initArrayProduct("Huawei");
-initArrayProduct("Samsung");
-initArrayProduct("Apple");
-initArrayProduct("Xiaomi");
-initArrayProduct("Oppo");
-initArrayProduct("Sony");
-initArrayProduct("Honor");
+initArrayProduct();
 
 const resetMenu = () => {
   for (let i = 0; i < li.length; i++) {
     let liSelection = li[i];
     ul.removeChild(liSelection);
+  }
+};
+
+const addAllToMenu = () => {
+  for (let i = 0; i < productList.length; i++) {
+    let item = productList[i];
+    addItemToMenu(item);
   }
 };
 
@@ -50,17 +83,22 @@ const addItemToMenu = (name) => {
   ul.appendChild(newLi);
 };
 
-const addAllToMenu = () => {
-  for (let i = 0; i < productList.length; i++) {
-    let item = productList[i];
-    console.log(item);
-    addItemToMenu(item);
-  }
-};
-
 const resetAndInitMenu = () => {
   resetMenu();
   addAllToMenu();
 };
 
 resetAndInitMenu();
+
+// document.querySelector("button").addEventListener("click", () => {
+
+//   productList.push(input.value);
+//   console.log(productList);
+//   resetAndInitMenu();
+// });
+
+function addItem() {
+  productList.push(input.value);
+  console.log(productList);
+  resetAndInitMenu();
+}
