@@ -152,6 +152,38 @@ const setInput = (name) => {
   input.value = name;
 };
 
+const addItemToBasket = (name) => {
+  const div = document.getElementById("yourBasket");
+  const p = document.createElement("p");
+  p.textContent = name;
+  p.setAttribute("class", "li-basket");
+  div.appendChild(p);
+};
+
+const addAllToBasket = () => {
+  for (let i = 0; i < productBasket.length; i++) {
+    let itemBasket = productBasket[i];
+    addItemToBasket(itemBasket);
+  }
+};
+
+const resetBasket = () => {
+  const div = document.getElementById("yourBasket");
+  const p = document.querySelectorAll("li-basket");
+  for (let i = 0; i < p.length; i++) {
+    let pSelection = p[i];
+    div.removeChild(pSelection);
+  }
+  console.log("remove");
+};
+
+const resetAndInitBasket = () => {
+  resetBasket();
+  addAllToBasket();
+};
+
+// resetAndInitBasket();
+
 const addToCard = (name) => {
   productBasket.push(name);
   console.log(productBasket);
@@ -160,29 +192,10 @@ const addToCard = (name) => {
     basket = "Vous avez " + productBasket.length + " produits dans le panier";
   }
   document.getElementById("basket-content").textContent = basket;
-  addAllTobasket();
+  resetAndInitBasket();
+};
+
+document.getElementById("empty-basket").addEventListener("click", () => {
+  console.log("essai");
   resetBasket();
-};
-
-const addItemToBasket = (name) => {
-  const ul = document.getElementById("yourBasket");
-  const newLi = document.createElement("li");
-  newLi.textContent = name;
-  ul.appendChild(newLi);
-};
-
-const addAllTobasket = () => {
-  for (let i = 0; i < productBasket.length; i++) {
-    let itemBasket = productBasket[i];
-    addItemToBasket(itemBasket);
-  }
-};
-
-const resetBasket = () => {
-  const ul = document.getElementById("yourBasket");
-  const li = document.querySelectorAll("li");
-  for (let i = 0; i < li.length; i++) {
-    let liSelection = li[i];
-    ul.removeChild(liSelection);
-  }
-};
+});
