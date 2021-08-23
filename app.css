@@ -19,6 +19,11 @@
     font-size: 35px;
   }
   
+
+#yourBasket {
+  color : rebeccapurple;
+}
+
   /* Create two columns/boxes that floats next to each other */
   nav {
     float: left;

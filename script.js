@@ -44,6 +44,18 @@
 // D BONUS mousseOver : Si la souris survole un item du menu de gauche,
 // faire un SET input pour avec le nom du produit survolé dans le champs texte
 
+// **** Algo 4 PANIER AJOUTER ET VIDER ****
+
+// A Creer un ARRAY qui correspont à notre panier
+
+// B afficherTexte Panier
+
+// C onclick sur les elelement tu menu AddToCard(name)
+
+// D Bouton VIDER PANIER
+
+// E afficher le detail du panier (tous les produit )
+
 // *************************************************************
 // variable
 
@@ -89,8 +101,8 @@ const addItemToMenu = (name) => {
   const newLi = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
-  a.setAttribute("onmouseover", "setInput('"+name+"')");
-  a.setAttribute("onclick", "addToCard('"+name+"')");
+  a.setAttribute("onmouseover", "setInput('" + name + "')");
+  a.setAttribute("onclick", "addToCard('" + name + "')");
   a.textContent = name;
   newLi.appendChild(a);
   ul.appendChild(newLi);
@@ -129,7 +141,7 @@ document.getElementById("delete").addEventListener("click", () => {
   for (let i = 0; i < productList.length; i++) {
     let items = productList[i];
     if (items === removeInput) {
-      productList.splice(i,1);
+      productList.splice(i, 1);
       console.log(productList[i]);
     }
   }
@@ -137,9 +149,40 @@ document.getElementById("delete").addEventListener("click", () => {
 });
 
 const setInput = (name) => {
-  input.value=name
+  input.value = name;
 };
 
 const addToCard = (name) => {
-  
+  productBasket.push(name);
+  console.log(productBasket);
+  let basket = "Votre panier est vide";
+  if (productBasket.length > 0) {
+    basket = "Vous avez " + productBasket.length + " produits dans le panier";
+  }
+  document.getElementById("basket-content").textContent = basket;
+  addAllTobasket();
+  resetBasket();
+};
+
+const addItemToBasket = (name) => {
+  const ul = document.getElementById("yourBasket");
+  const newLi = document.createElement("li");
+  newLi.textContent = name;
+  ul.appendChild(newLi);
+};
+
+const addAllTobasket = () => {
+  for (let i = 0; i < productBasket.length; i++) {
+    let itemBasket = productBasket[i];
+    addItemToBasket(itemBasket);
+  }
+};
+
+const resetBasket = () => {
+  const ul = document.getElementById("yourBasket");
+  const li = document.querySelectorAll("li");
+  for (let i = 0; i < li.length; i++) {
+    let liSelection = li[i];
+    ul.removeChild(liSelection);
+  }
 };
