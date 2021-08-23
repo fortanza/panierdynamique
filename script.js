@@ -13,7 +13,7 @@
 
 // E  ResetAndInitMenu() // resetMenu + addAllToMenu
 
-// Algo 2 Ajouter produits au catalogue
+// **** Algo 2 Ajouter produits au catalogue ****
 
 // A crèer un champ input
 
@@ -37,15 +37,10 @@
 // variable
 
 let productList = [];
-const ul = document.querySelector("ul");
-const li = document.querySelectorAll("li");
-const nav = document.querySelector("nav");
 const input = document.querySelector("input");
 
 // *************************************************************
 // function
-
-
 
 const initArrayProduct = () => {
   productList.push("Huawei");
@@ -61,8 +56,11 @@ const initArrayProduct = () => {
 initArrayProduct();
 
 const resetMenu = () => {
+  const ul = document.querySelector("ul");
+  const li = document.querySelectorAll("li");
   for (let i = 0; i < li.length; i++) {
     let liSelection = li[i];
+
     ul.removeChild(liSelection);
   }
 };
@@ -75,6 +73,7 @@ const addAllToMenu = () => {
 };
 
 const addItemToMenu = (name) => {
+  const ul = document.querySelector("ul");
   const newLi = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
@@ -90,15 +89,23 @@ const resetAndInitMenu = () => {
 
 resetAndInitMenu();
 
-// document.querySelector("button").addEventListener("click", () => {
+let checkDuplicate = (testProduct) => {
+  let isDuplicate = false;
+  for (let i = 0; i < productList.length; i++) {
+    let items = productList[i];
+    if (items === testProduct) {
+      isDuplicate = true;
+    }
+  }
+  return isDuplicate;
+};
 
-//   productList.push(input.value);
-//   console.log(productList);
-//   resetAndInitMenu();
-// });
-
-function addItem() {
-  productList.push(input.value);
+document.querySelector("button").addEventListener("click", () => {
+  if (checkDuplicate(input.value)) {
+    alert("Erreur: Produit existant");
+  } else {
+    productList.push(input.value);
+  }
   console.log(productList);
   resetAndInitMenu();
-}
+});
