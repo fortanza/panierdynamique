@@ -1,6 +1,6 @@
 "use strict";
 
-// Algo 1 afficher liste de produit dynamique
+// **** Algo 1 afficher liste de produit dynamique ****
 //Date + Visualisation
 
 // A Les données: créer tableaux liste de produit (String) function initArrayProduct
@@ -33,10 +33,22 @@
 
 // si élément trouvé (nom) return true / sinon false
 
+// **** Algo 3  PANIER AJOUTER ET VIDER ****
+
+// A ajouter bouton DELETE
+
+// B créer fonction deleteItem(name)
+
+// C parcourir la liste de produits et supprimer si trouvé
+
+// D BONUS mousseOver : Si la souris survole un item du menu de gauche,
+// faire un SET input pour avec le nom du produit survolé dans le champs texte
+
 // *************************************************************
 // variable
 
 let productList = [];
+let productBasket = [];
 const input = document.querySelector("input");
 
 // *************************************************************
@@ -77,6 +89,8 @@ const addItemToMenu = (name) => {
   const newLi = document.createElement("li");
   const a = document.createElement("a");
   a.setAttribute("href", "#");
+  a.setAttribute("onmouseover", "setInput('"+name+"')");
+  a.setAttribute("onclick", "addToCard('"+name+"')");
   a.textContent = name;
   newLi.appendChild(a);
   ul.appendChild(newLi);
@@ -109,3 +123,23 @@ document.querySelector("button").addEventListener("click", () => {
   console.log(productList);
   resetAndInitMenu();
 });
+
+document.getElementById("delete").addEventListener("click", () => {
+  const removeInput = input.value;
+  for (let i = 0; i < productList.length; i++) {
+    let items = productList[i];
+    if (items === removeInput) {
+      productList.splice(i,1);
+      console.log(productList[i]);
+    }
+  }
+  resetAndInitMenu();
+});
+
+const setInput = (name) => {
+  input.value=name
+};
+
+const addToCard = (name) => {
+  
+};
